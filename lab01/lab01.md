@@ -137,6 +137,7 @@ docker run \
 docker run \
     --name db-mysql \
     -e MYSQL_ROOT_PASSWORD=admin123 \
+    -p 3307:3306 \
     -v ./mysql-conf:/etc/mysql/conf.d \
     -v db-mysql-new-data:/var/lib/mysql \
     -d mysql
