@@ -1,6 +1,8 @@
 # Lab03 - Create and Access database on MySQL Docker Container
 
-References: https://dev.mysql.com/doc/refman/8.4/en/creating-database.html
+References: 
+* https://dev.mysql.com/doc/refman/8.4/en/creating-database.html
+* https://phoenixnap.com/kb/how-to-create-a-table-in-mysql 
 
 ## Step 1 
 
@@ -95,3 +97,65 @@ DROP DATABASE db_product;
 SHOW DATABASES;
 ```
 
+## Step 4
+
+Create new tables with foreign key
+
+* Set default storage engine for current section
+
+```sql
+SET default_storage_engine = InnoDB;
+```
+
+* Create ***tb_categories*** table
+
+```sql
+CREATE TABLE IF NOT EXISTS tb_categories (
+    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    name VARCHAR(50) NOT NULL
+) CHARACTER SET utf16 COLLATE utf16_unicode_ci ENGINE=InnoDB;
+```
+
+or
+
+```sql
+CREATE TABLE IF NOT EXISTS tb_categories (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+) CHARACTER SET utf16 COLLATE utf16_unicode_ci ENGINE=InnoDB;
+```
+
+* Create ***tb_products*** table have foreign key to reference to id of tb_categories
+
+```sql
+CREATE TABLE IF NOT EXISTS tb_products (
+    id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(100) NOT NULL, 
+    price INT NOT NULL,
+    cat_id INT NOT NULL, 
+    PRIMARY KEY (id),
+    FOREIGN KEY (cat_id) 
+        REFERENCES tb_categories(id) 
+        ON UPDATE CASCADE 
+        ON DELETE RESTRICT
+) CHARACTER SET utf16 COLLATE utf16_unicode_ci ENGINE=InnoDB;
+```
+
+* Show all table on database
+
+```sql
+SHOW TABLES;
+```
+
+* Using __DESCRIBE__ command to show table structure
+
+```sql
+DESCRIBE tb_categories;
+```
+
+and 
+
+```sql
+DESCRIBE tb_products;
+```
