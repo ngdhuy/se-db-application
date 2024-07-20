@@ -33,7 +33,7 @@ Enter root-password (admin123) after enter above command
 
 * Create new Database User 
 
-```shell
+```sql
 CREATE USER 'db_user'@'localhost' IDENTIFIED BY 'user_pass';
 ```
 
@@ -42,19 +42,19 @@ __user_pass__ is password of database user
 
 * Set permission (PRIVILEGES) for ***db_user*** to access all databases
 
-```shell
+```sql
 GRANT ALL PRIVILEGES ON *.* TO 'db_user'@'localhost';
 ```
 
 * List all users on MySQL
 
-```shell
+```sql
 SELECT user, host FROM mysql.user;
 ```
 
 * Log out MySQL Database (with root user)
 
-```shell
+```sql
 \q
 ```
 
@@ -63,16 +63,45 @@ SELECT user, host FROM mysql.user;
 ```shell
 mysql -u db_user -p
 ```
-Enter db_user password (user_password)
+Enter db_user password is ***user_pass***
 
 * Show current user information login to MySQL
 
-```shell
+```sql
 SELECT USER();
 ```
 or
-```shell
+```sql
 SELECT CURRENT_USER();
+```
+
+* List all user on MySQL
+
+```sql
+SELECT host, user FROM mysql.user; 
+```
+
+## To change user password
+
+* Connect Database with ***root***
+
+```shell
+mysql -u root -p
+```
+
+Enter root password (admin123)
+
+* Change db_user password to "new_pass"
+
+
+```sql
+ALTER USER 'db_user'@'localhost' IDENTIFIED BY 'new_pass';
+```
+
+* Reload Grant Table
+
+```sql
+FLUSH PRIVILEGES;
 ```
 
 * When I want to run MySQL Docker Container
