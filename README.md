@@ -10,4 +10,6 @@ Course of Database application
 
 ## 2 - Labs
 
-* 2.1 - Lab 01 - Setup MySQL with Docker
+* 2.1 - Lab 01 - Setup MySQL with Docker Container
+* 2.2 - Lab 02 - Create db-user to access MySQL with MySQL Docker Container
+* 2.3 - Lab 03 - Create and Access to Database with MySQL Docker Container
