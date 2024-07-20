@@ -1,6 +1,6 @@
 # Lab03 - Create and Access database on MySQL Docker Container
 
-References: 
+References: https://dev.mysql.com/doc/refman/8.4/en/creating-database.html
 
 ## Step 1 
 
@@ -47,3 +47,51 @@ mysql -u db_user -p
 ```
 
 using db_user password is ***user_pass***
+
+## Step 3
+
+* Create database with syntax command 
+
+```sql
+CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name
+    [create_option] ...
+
+create_option: [DEFAULT] {
+    CHARACTER SET [=] charset_name
+  | COLLATE [=] collation_name
+  | ENCRYPTION [=] {'Y' | 'N'}
+}
+```
+
+* And now, we create database ***db-product*** with command
+
+```sql
+CREATE DATABASE IF NOT EXISTS db_product
+CHARACTER SET utf16
+COLLATE utf16_unicode_ci;
+```
+
+* Select database to access
+
+```sql
+use db_product;
+```
+
+* Show current database which is using
+
+```sql
+SELECT DATABASE();
+```
+
+* And drop database with command
+
+```sql
+DROP DATABASE db_product;
+```
+
+* Show all database tin MySQL Server
+
+```sql
+SHOW DATABASES;
+```
+
