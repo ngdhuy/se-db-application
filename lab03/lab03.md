@@ -159,3 +159,57 @@ and
 ```sql
 DESCRIBE tb_products;
 ```
+
+## Step 5
+
+Using GUI Client tool to access to MySQL Docker Container database
+
+### 5.1 - MySQL Workbench
+
+Download MySQL Workbench: [click here to download](https://dev.mysql.com/downloads/workbench/)
+
+![Home Screen of MySQL](./images/img_01.png)
+
+* Create Connect to Database with MySQL Workbench
+
+![Create connection](./images/img_02.png)
+
+click to button ***Test connection*** to test
+
+![Alert connection successful](./images/img_03.png)
+
+Click to button ***OK*** to save the connection
+
+* Connect to database (database schema db_product)
+
+Click connection which is created in above step to connect the database
+
+![Connect to database](./images/img_04.png)
+
+* Using MySQL Work to access database (database schema db_product)
+
+Create query to access database
+
+![Create and Execute query](./images/img_05.png)
+
+* Create EER model (Database Diagram) with MySQL Workbench
+
+Create EER model from Database
+
+![create EER](./images/img_06.png)
+
+Using connection which is create to connect the database
+
+![chose connection](./images/img_07.png)
+
+Click ***Continue*** button to move to next step
+
+Chose Database to create EER Model
+
+![chose database](./images/img_08.png)
+
+Click ***Continue*** button to end step
+
+***The EER is the same as below picture***
+
+![EER model](./images/img_09.png)
