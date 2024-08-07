@@ -1,6 +1,8 @@
 # Lab04 - Basic Query on MySQL
 
-Reference: https://dev.mysql.com/doc/refman/8.4/en/sql-data-manipulation-statements.html
+Reference: 
+* https://dev.mysql.com/doc/refman/8.4/en/sql-data-manipulation-statements.html
+* https://www.w3schools.com/sql/default.asp
 
 ## 1 - Set working database
 
@@ -116,4 +118,141 @@ WHERE p.cat_id = (SELECT id
 UPDATE tb_products
 SET name = 'Galaxy S25 Ultra'
 WHERE name like '%12 Pro Max';
+```
+
+## 5 - Create Store Procedure on MySQL
+
+Reference: https://dev.mysql.com/doc/refman/8.4/en/create-procedure.html
+
+* Syntax to create Store Procedure
+
+```sql
+CREATE
+    [DEFINER = user]
+    PROCEDURE [IF NOT EXISTS] sp_name ([proc_parameter[,...]])
+    [characteristic ...] routine_body
+
+CREATE
+    [DEFINER = user]
+    FUNCTION [IF NOT EXISTS] sp_name ([func_parameter[,...]])
+    RETURNS type
+    [characteristic ...] routine_body
+
+proc_parameter:
+    [ IN | OUT | INOUT ] param_name type
+
+func_parameter:
+    param_name type
+
+type:
+    Any valid MySQL data type
+
+characteristic: {
+    COMMENT 'string'
+  | LANGUAGE SQL
+  | [NOT] DETERMINISTIC
+  | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+  | SQL SECURITY { DEFINER | INVOKER }
+}
+
+routine_body:
+    SQL routine
+```
+
+* Simple store procedure to get all data of ***tb_products***
+
+```sql
+CREATE PROCEDURE sp_get_all_products()
+BEGIN
+    SELECT * FROM tb_products;
+END;
+```
+
+* Call and execute store procedure
+
+```sql
+CALL sp_get_all_products();
+```
+
+* Drop store procedure
+
+```sql
+DROP sp_get_all_products;
+```
+
+***Cannot update or change Store Procedure in MySQL***
+
+* Get information of one product by product_id
+
+```sql
+CREATE PROCEDURE sp_get_product_by_id(
+    IN id INT
+)
+BEGIN
+    SELECT p.id, p.name, p.price, c.name
+    FROM tb_products AS p LEFT JOIN tb_categories AS c ON p.cat_id = c.id
+    WHERE p.id = id;
+END;
+
+---
+
+CALL sp_get_product_by_id(10);
+```
+
+* Count product have categories name is "mobile"
+
+```sql
+CREATE PROCEDURE sp_count_product_by_categories(
+    IN cat_name VARCHAR(50), 
+    OUT num_of_product INT
+)
+BEGIN
+    SELECT COUNT(p.id) INTO num_of_product
+    FROM tb_products AS p LEFT JOIN tb_categories AS c ON p.cat_id = c.id
+    WHERE c.name = cat_name;
+END;
+
+-- execute store procedure
+
+CALL sp_count_product_by_categories('mobile', @num_of_product);
+
+-- print output parameter
+
+SELECT @num_of_product;
+```
+
+* Drop Store Procedure
+
+```sql
+DROP PROCEDURE IF EXISTS sp_count_product_by_categories;
+```
+
+## 6 - Create Function in MySQL
+
+* Create function to count all products
+
+```sql
+-- set DETERMINISTIC for global
+
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+-- Create function
+
+CREATE FUNCTION count_all() RETURNS INT
+BEGIN
+    DECLARE total INT;
+    SET total = 0;
+    SELECT COUNT(id) INTO total FROM tb_products;
+    RETURN total;
+END;
+
+-- call function
+
+SELECT count_all();
+```
+
+* Drop the function
+
+```sql
+DROP FUNCTION IF EXISTS count_all;
 ```
