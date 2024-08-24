@@ -83,11 +83,9 @@ SELECT p.id, p.name, p.price, c.name
 FROM tb_products p LEFT JOIN tb_categories c ON p.cat_id = c.id;
 ```
 
-## 2 - Using GUI Tool
+## 2 - Using GUI Tool - MySQL Workbench
 
-### 2.1 - MySQL Workbench
-
-#### 2.1.1 - Export database with MySQL Workbench
+#### 2.1 - Export database with MySQL Workbench
 
 * Connect to MySQL Docker Container with MySQL Workbench
 
@@ -112,7 +110,7 @@ FROM tb_products p LEFT JOIN tb_categories c ON p.cat_id = c.id;
 > SET GLOBAL log_bin_trust_function_creators = 1;
 > ```
 
-#### 2.1.2 - Import database with MySQL Workbench
+#### 2.2 - Import database with MySQL Workbench
 
 * In MySQL Workbench, in the ***Administrator*** panel, choose ***Data Import/Restore***.
 
@@ -120,3 +118,4 @@ FROM tb_products p LEFT JOIN tb_categories c ON p.cat_id = c.id;
 
 ![specific database to import](./images/img_04.png)
 
+> ***Azure Data Studio*** only export and import database for ***MS SQL Server***
