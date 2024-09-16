@@ -44,7 +44,7 @@ CREATE TABLE tb_report(
 * Create event update report which store total of product for each minutes
 
 ```sql
-ALTER EVENT event_tatal_product_report_minutes
+ALTER EVENT event_total_product_report_minutes
     ON SCHEDULE 
     	EVERY 1 SECOND
     DO
@@ -73,3 +73,8 @@ INSERT INTO tb_products(id, name, price, cat_id) VALUES (21, 'iPhone 16 PRO MAX'
 SELECT * FROM tb_report;
 ```
 
+* Drop event to stop event
+
+```sql
+DROP EVENT event_total_product_report_minutes;
+```
